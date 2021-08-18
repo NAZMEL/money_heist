@@ -7,6 +7,10 @@ name = "pypi"
 django = "*"
 environs = "*"
 psycopg2-binary = "*"
+djangorestframework = "*"
+django-cors-headers = "*"
+djangorestframework-simplejwt = "*"
+djangorestframework-camel-case = "*"
 
 [dev-packages]
 flake8 = "*"
