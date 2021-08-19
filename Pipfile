@@ -11,6 +11,8 @@ djangorestframework = "*"
 django-cors-headers = "*"
 djangorestframework-simplejwt = "*"
 djangorestframework-camel-case = "*"
+drf-yasg = "*"
+six = "*"
 
 [dev-packages]
 flake8 = "*"
