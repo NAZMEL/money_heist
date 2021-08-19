@@ -3,6 +3,7 @@ from authentication.models import User
 
 
 class UserSerializer(serializers.ModelSerializer):
+    data_joined = serializers.ReadOnlyField()
 
     class Meta:
         model = User
