@@ -12,8 +12,10 @@ from user_profile.serializers import UserSerializer
 class ProfileViewSet(mixins.RetrieveModelMixin,
                      mixins.UpdateModelMixin,
                      viewsets.GenericViewSet):
+
     permission_classes = (IsAuthenticated, )
     queryset = User.objects.all()
+
     serializer_class = UserSerializer
 
     def get_object(self):

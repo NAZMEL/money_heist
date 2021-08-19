@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'corsheaders',
+    'rest_framework.authtoken',
 
     # Custom apps
     'authentication',
@@ -77,7 +78,7 @@ TEMPLATES = [
     },
 ]
 
-AUTH_USER_MODEL = "authentication.User"
+AUTH_USER_MODEL = 'authentication.User'
 
 WSGI_APPLICATION = 'money_heist.wsgi.application'
 

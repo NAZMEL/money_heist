@@ -1,0 +1,22 @@
+###
+POST http://localhost:8000/v1/auth/
+Content-Type: application/json
+
+{
+  "email": "admin@gmail.com",
+  "password": "admin"
+}
+
+###
+
+GET http://localhost:8000/v1/profile/
+Content-Type: application/json
+Authorization: JWT eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjI5MzY3NTUyLCJqdGkiOiIzNTQ4NmRlMGYzZmY0NGQzYmJlZGU3MTY3ZWE0YzkzOCIsInVzZXJfaWQiOjF9.n5wU53Bewu8NAoVEpl8Hpa5GepmtDhbEokFu21MUqrU
+###
+
+GET http://localhost:8000/v1/profile/
+Content-Type: application/json
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjI5MzY0NTMyLCJqdGkiOiJmYmY4NWMyY2IyZWQ0NGI4OGY5MTUwYmI5YTljNzMzMCIsInVzZXJfaWQiOjF9.QiUHCj3h44iCGhC0BMxsLynn4o-_oXcVBNAtd6pp8uw
+
+
+
