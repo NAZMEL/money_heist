@@ -11,6 +11,8 @@ data/
 .data/
 .money_heist-JanCN-_C/
 
+# Edits from Nazar
+money_heist/user_data.py
 
 ### Django ###
 *.log
