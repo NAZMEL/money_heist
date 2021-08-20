@@ -34,8 +34,8 @@ class TestObtainTokenPair(BaseAPITest):
 class TestRefreshJSONWebToken(BaseAPITest):
 
     def setUp(self):
-        self.email = user_data.user_email
-        self.password = user_data.user_password
+        self.email = 'test_email@gmail.com'
+        self.password = 'test_pass'
         self.user = self.create(self.email, self.password)
         self.refresh_token = str(RefreshToken.for_user(self.user))
 
