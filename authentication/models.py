@@ -1,22 +1,19 @@
-
 from django.contrib.auth.base_user import AbstractBaseUser
 from django.contrib.auth.models import PermissionsMixin, BaseUserManager
 from django.db import models, transaction
-from django.utils.translation import gettext_lazy as _
 
 
-class CustomUserManager(BaseUserManager):
+class UserManager(BaseUserManager):
     """Custom user manager defines the behaviour of User's ``objects`` object.
     In this model, we add 2 methods create_user and create_superuser
     """
 
     @transaction.atomic
     def create_user(self, email, password=None):
-        """Creates and saves a User with the given email, date of
-        birth and password.
+        """Creates and saves a User with the given email and password.
         """
         if not email:
-            raise ValueError(_('Users must have an email address'))
+            raise ValueError('Users must have an email address')
 
         user = self.model(
             email=self.normalize_email(email),
@@ -28,8 +25,7 @@ class CustomUserManager(BaseUserManager):
         return user
 
     def create_superuser(self, email, password):
-        """Creates and saves a superuser with the given email, date of
-        birth and password.
+        """Creates and saves a superuser with the given email and password.
         """
         user = self.create_user(
             email,
@@ -48,34 +44,34 @@ class User(AbstractBaseUser, PermissionsMixin):
     Note, we must set this model in ``AUTH_USER_MODEL`` setting::
         AUTH_USER_MODEL='authentication.User'
     """
-    email = models.EmailField(verbose_name=_('email address'), max_length=255, unique=True)
+    email = models.EmailField(verbose_name='email address', max_length=255, unique=True)
     is_staff = models.BooleanField(default=False,
-                                   help_text=_('Designates whether this user can access this admin site.'),
-                                   verbose_name=_('is staff'))
+                                   help_text='Designates whether this user can access this admin site.',
+                                   verbose_name='is staff')
     is_active = models.BooleanField(
         default=False,
-        help_text=_(
-            'Designates whether this user should be treated as active. '
-            'Unselect this instead of deleting accounts.'
-        ),
-        verbose_name=_('is active')
+        help_text=
+        'Designates whether this user should be treated as active. '
+        'Unselect this instead of deleting accounts.'
+        ,
+        verbose_name='is active'
     )
     is_restoring_password = models.BooleanField(
         default=False,
-        help_text=_(
-            'Designates that this user should confirm email after password reset . '
-        ),
-        verbose_name=_('restoring_password')
+        help_text=
+        'Designates that this user should confirm email after password reset . '
+        ,
+        verbose_name='restoring_password'
     )
     is_superuser = models.BooleanField(default=False,
-                                       help_text=_('Designates that this user has all permissions without '
-                                                   'explicitly assigning them.'),
-                                       verbose_name=_('is superuser'))
+                                       help_text='Designates that this user has all permissions without '
+                                                 'explicitly assigning them.',
+                                       verbose_name='is superuser')
 
-    date_joined = models.DateTimeField(auto_now_add=True, verbose_name=_('date joined'))
-    last_login = models.DateTimeField(_('last login'), blank=True, null=True)
+    date_joined = models.DateTimeField(auto_now_add=True, verbose_name='date joined')
+    last_login = models.DateTimeField('last login', blank=True, null=True)
 
-    objects = CustomUserManager()
+    objects = UserManager()
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ()
@@ -105,6 +101,6 @@ class User(AbstractBaseUser, PermissionsMixin):
 
     class Meta:
         db_table = 'users'
-        verbose_name = _('user')
-        verbose_name_plural = _('users')
+        verbose_name = 'user'
+        verbose_name_plural = 'users'
         ordering = ('-id',)
