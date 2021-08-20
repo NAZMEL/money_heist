@@ -1,4 +1,3 @@
-from django.conf import settings
 from django.utils import timezone
 from rest_framework.test import APITestCase
 from rest_framework_simplejwt.settings import api_settings
@@ -8,9 +7,7 @@ from authentication.models import User
 
 
 class BaseAPITest(APITestCase):
-    """BaseAPITest class contains useful methods to
-    automatically create and authorize users via API with JWT
-    """
+
     def create(self, email, password):
         user = User.objects.create_user(email=email, password=password)
         user.last_login = timezone.now()
