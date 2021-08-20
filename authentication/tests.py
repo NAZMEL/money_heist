@@ -2,14 +2,13 @@ from rest_framework.reverse import reverse
 from rest_framework import status
 from rest_framework_simplejwt.tokens import RefreshToken
 from money_heist.tests import BaseAPITest
-from money_heist import user_data                  # in base directory
 
 
 class TestObtainTokenPair(BaseAPITest):
 
     def setUp(self):
-        self.email = user_data.user_email
-        self.password = user_data.user_password
+        self.email = 'test_email@gmail.com'
+        self.password = 'test_pass'
         self.user = self.create(self.email, self.password)
         self.data = {
             'email': self.email,
