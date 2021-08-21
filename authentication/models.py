@@ -4,13 +4,11 @@ from django.db import models, transaction
 
 
 class UserManager(BaseUserManager):
-    """Custom user manager defines the behaviour of User's ``objects`` object.
-    In this model, we add 2 methods create_user and create_superuser
-    """
 
     @transaction.atomic
     def create_user(self, email, password=None):
-        """Creates and saves a User with the given email and password.
+        """
+        Creates and saves a User with the given email and password.
         """
         if not email:
             raise ValueError('Users must have an email address')
@@ -25,7 +23,8 @@ class UserManager(BaseUserManager):
         return user
 
     def create_superuser(self, email, password):
-        """Creates and saves a superuser with the given email and password.
+        """
+        Creates and saves a superuser with the given email and password.
         """
         user = self.create_user(
             email,
@@ -39,11 +38,7 @@ class UserManager(BaseUserManager):
 
 
 class User(AbstractBaseUser, PermissionsMixin):
-    """Custom User model. When we override this model,
-    we ensure that we have full control on User's model.
-    Note, we must set this model in ``AUTH_USER_MODEL`` setting::
-        AUTH_USER_MODEL='authentication.User'
-    """
+
     email = models.EmailField(verbose_name='email address', max_length=255, unique=True)
     is_staff = models.BooleanField(default=False,
                                    help_text='Designates whether this user can access this admin site.',
