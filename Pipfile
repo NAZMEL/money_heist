@@ -13,6 +13,8 @@ djangorestframework-simplejwt = "*"
 djangorestframework-camel-case = "*"
 drf-yasg = "*"
 six = "*"
+httpie = "*"
+redis = "*"
 
 [dev-packages]
 flake8 = "*"

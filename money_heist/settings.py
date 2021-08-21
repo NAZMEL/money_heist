@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 import datetime
 from pathlib import Path
 import environs
+import os
 
 env = environs.Env()
 
@@ -66,7 +67,7 @@ ROOT_URLCONF = 'money_heist.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -144,7 +145,8 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': [
-        'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
+        #'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
+        'rest_framework.permissions.DjangoModelPermissions',
     ],
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework_simplejwt.authentication.JWTAuthentication',
@@ -183,3 +185,25 @@ SIMPLE_JWT = {
     'AUTH_TOKEN_CLASSES': ('rest_framework_simplejwt.tokens.AccessToken',),
     'TOKEN_TYPE_CLAIM': 'token_type',
 }
+
+
+# Celery
+CELERY_BROKER_URL = env.str('BROKER_URL')
+CELERY_TASK_DEFAULT_QUEUE = "django"
+
+CELERY_TASK_SOFT_TIME_LIMIT = env.int('CELERY_TASK_SOFT_TIME_LIMIT_SEC', 40)
+CELERY_WORKER_SEND_TASK_EVENTS = True
+
+# Logging
+DJANGO_LOGFILE_NAME = env.str('DJANGO_LOG_PATH', os.path.join(BASE_DIR, '.data/django/access.log'))
+LOGFILE_SIZE = 5 * 1024 * 1024
+
+CELERY_LOGFILE_NAME = env.str('CELERY_LOG_PATH', os.path.join(BASE_DIR, '.data/django/celery.log'))
+
+if not os.path.exists(os.path.dirname(DJANGO_LOGFILE_NAME)):
+    os.makedirs(os.path.dirname(DJANGO_LOGFILE_NAME))
+
+if not os.path.exists(os.path.dirname(CELERY_LOGFILE_NAME)):
+    os.makedirs(os.path.dirname(CELERY_LOGFILE_NAME))
+
+USER_ACTIVATION_URL = env.str('USER_ACTIVATION_URL', '')
