@@ -1,3 +1,5 @@
+from abc import ABC
+
 from django.conf import settings
 from django.utils.encoding import force_bytes, force_text
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
@@ -32,8 +34,8 @@ class SignUpSerializer(serializers.ModelSerializer):
 
         template = 'notifications/activate_user.html'
 
-        send_email.delay(
-            subject="Activate your ChooseOne account",
+        send_email(
+            subject="Activate your MoneyHeist account",
             template=template,
             recipients=[user.email],
             context=context
@@ -46,10 +48,6 @@ class ActivateUserSerializer(serializers.Serializer):
     token = serializers.CharField()
     custom_fields = serializers.SerializerMethodField()
 
-    def get_is_sold(self, obj):
-        return True
-
-
     def validate(self, attrs):
         token = attrs['token']
         error_text = f"Provided activation token '{token}' is not valid"
@@ -58,7 +56,6 @@ class ActivateUserSerializer(serializers.Serializer):
             email = force_text(urlsafe_base64_decode(email))
         except (TypeError, ValueError):
             raise serializers.ValidationError(error_text)
-
         try:
             user = User.objects.get(email=email)
         except User.DoesNotExist:
@@ -77,7 +74,7 @@ class ActivateUserSerializer(serializers.Serializer):
         return user
 
 
-class ChangePasswordSerializer(serializers.Serializer):
-    model = User
-    old_password = serializers.CharField(required=True)
-    new_password = serializers.CharField(required=True)
+# class ChangePasswordSerializer(serializers.Serializer):
+#     model = User
+#     old_password = serializers.CharField(required=True)
+#     new_password = serializers.CharField(required=True)

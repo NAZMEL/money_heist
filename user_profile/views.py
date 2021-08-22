@@ -1,16 +1,13 @@
 from rest_framework.generics import UpdateAPIView
 from rest_framework.views import APIView
-from rest_framework.viewsets import GenericViewSet
-from rest_framework.viewsets import ModelViewSet
-from rest_framework import mixins
-from rest_framework import viewsets, status
+from rest_framework.viewsets import GenericViewSet, ModelViewSet
+from rest_framework import viewsets, status, mixins, permissions
 from rest_framework.permissions import IsAuthenticated, AllowAny
 from rest_framework.response import Response
+from rest_framework.decorators import action, api_view, permission_classes
+
 from authentication.models import User
 from user_profile.serializers import UserSerializer
-
-from rest_framework.decorators import action, api_view, permission_classes
-from rest_framework import permissions
 
 
 class ProfileViewSet(mixins.RetrieveModelMixin,
@@ -36,31 +33,3 @@ class ProfileViewSet(mixins.RetrieveModelMixin,
         instance = self.get_object()
         self.perform_destroy(instance)
         return Response(status=status.HTTP_204_NO_CONTENT)
-
-
-# class ProfileUpdateView()
-#
-#     # def perform_update(self, serializer_class):
-#     #     serial.save()
-#
-#     instance = self.get_object()
-#     serializer = self.get_serializer(instance, data=request.data, partial=partial)
-#     serializer.is_valid(raise_exception=True)
-#     self.perform_update(serializer)
-
-
-@api_view(['GET'])
-@permission_classes((permissions.AllowAny,))
-def user_profiles_view(request):
-    '''
-    Get Users info
-    '''
-    if request.method == 'GET':
-        users = User.objects.all()
-        serializer = UserSerializer(users, many=True)
-        return Response(serializer.data)
-
-
-
-
-

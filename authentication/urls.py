@@ -12,13 +12,11 @@ app_name = 'authentication'
 urlpatterns = [
     path('', TokenObtainPairView.as_view(), name='obtain'),
     path('refresh/', TokenRefreshView.as_view(), name='refresh'),
-    path('register/', user_register, name='user-register'),
+    path('signup/', SignUpView.as_view(), name='sign-up'),
     path('activate/', ActivateUserView.as_view(), name='user-activate'),
 ]
 
 # path('verify/', views.VerifyJSONWebToken.as_view(), name='auth-verify'),
 # path('refresh/', views.RefreshJSONWebToken.as_view(), name='auth-refresh'),
-# path('sign-up/', views.SignUpView.as_view(), name='sign-up'),
-# path('activate/', views.ActivateUserView.as_view(), name='activate'),
 # path('reset/', views.ResetPasswordView.as_view(), name='reset'),
 # path('restore/', views.RestorePasswordView.as_view(), name='restore'),

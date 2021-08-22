@@ -30,7 +30,7 @@ def send_email(self, subject, template, recipients, context):
             {
                 'From': {
                     'Email': settings.MAILJET_USER,
-                    'Name': 'Choose One Support'
+                    'Name': 'Money Heist Team'
                 },
                 'To': recipients,
                 'Subject': subject,
