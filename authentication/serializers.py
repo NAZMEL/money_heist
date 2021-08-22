@@ -72,9 +72,3 @@ class ActivateUserSerializer(serializers.Serializer):
         user.is_active = True
         user.save()
         return user
-
-
-# class ChangePasswordSerializer(serializers.Serializer):
-#     model = User
-#     old_password = serializers.CharField(required=True)
-#     new_password = serializers.CharField(required=True)
