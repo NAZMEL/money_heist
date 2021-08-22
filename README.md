@@ -32,21 +32,27 @@ The Money Heist is a spending tracking application. The project is being used to
 + MailJet API
 
 
-<hr/>
-### .env file
+## .env file<hr>
 
-SECRET_KEY= <your secret key>
-  
-POSTGRES_USER= <your postgres username>
-  
-POSTGRES_PASSWORD= <your postgres password>
-POSTGRES_DB= <your database name>
-DB_HOST= <your host>
-DB_PORT=. <your port e.g 5433>
-BROKER_URL= <your redis url e.g. "redis://localhost:6379/0">
+SECRET_KEY= your secret key
 
-MAILJET_PUBLIC_KEY= <your API key from MailJet>
-MAILJET_SECRET_KEY= <your secret key from MailJet>
-MAILJET_USER= <your email address from MailJet>
+POSTGRES_USER= your postgres username
 
-USER_ACTIVATION_URL=http://127.0.0.1:8000/v1/auth/activate/
+POSTGRES_PASSWORD= your postgres password
+
+POSTGRES_DB= your database name
+
+DB_HOST= your host
+
+DB_PORT=. your port e.g 5433
+
+BROKER_URL= your redis url e.g. "redis://localhost:6379/0"
+
+
+MAILJET_PUBLIC_KEY= your API key from MailJet
+
+MAILJET_SECRET_KEY= your secret key from MailJet
+
+MAILJET_USER= your email address from MailJet
+
+USER_ACTIVATION_URL= http://127.0.0.1:8000/v1/auth/activate/
