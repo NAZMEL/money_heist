@@ -1,4 +1,3 @@
-from rest_framework.decorators import api_view, permission_classes
 from rest_framework.generics import CreateAPIView
 from rest_framework.permissions import AllowAny
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer, TokenRefreshSerializer
@@ -7,8 +6,7 @@ from authentication.serializers import SignUpSerializer, ActivateUserSerializer
 from rest_framework.views import APIView
 from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework.response import Response
-from rest_framework import status, permissions
-from .models import User
+from rest_framework import status
 
 
 class ObtainJSONWebToken(TokenObtainPairView):
