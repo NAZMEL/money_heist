@@ -7,7 +7,7 @@ from rest_framework.response import Response
 from rest_framework.decorators import action, api_view, permission_classes
 
 from authentication.models import User
-from user_profile.serializers import UserSerializer
+from user_profile.serializers import UpdateUserSerializer
 
 
 class ProfileViewSet(mixins.RetrieveModelMixin,
