@@ -1,7 +1,8 @@
 # Money Heist
+<hr/>
 The Money Heist is a spending tracking application. The project is being used to track your incomes spending and current balance. 
 
-## User can
+## User can<hr>
 - add spending;
 - select category of spending;
 - select and change date;
@@ -11,7 +12,7 @@ The Money Heist is a spending tracking application. The project is being used to
 - filter by category or sending date;
 - to export all spendings into .csv file
 
-## Packages
+## Packages<hr>
 + `django`
 + `environs`
 + `psycopg2-binary`
@@ -22,3 +23,8 @@ The Money Heist is a spending tracking application. The project is being used to
 + `celery`
 + `redis`
 
+## Development<hr>
++ Python 3.9
++ Docker
++ Postgres 12.3
++ Postman
