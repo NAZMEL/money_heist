@@ -37,18 +37,3 @@ class ActivateUserView(APIView):
             'access_token': str(token.access_token),
             'refresh_token': str(token)
         }, status=status.HTTP_200_OK)
-
-
-@api_view(['POST'])
-@permission_classes((permissions.AllowAny, ))
-def user_register(request):
-    '''
-    Register user
-    '''
-    if request.method == 'POST':
-        serializer = SignUpSerializer(data=request.data)
-
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)

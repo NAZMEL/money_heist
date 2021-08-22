@@ -15,6 +15,7 @@ import environs
 import os
 
 env = environs.Env()
+env.read_env()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -207,3 +208,8 @@ if not os.path.exists(os.path.dirname(CELERY_LOGFILE_NAME)):
     os.makedirs(os.path.dirname(CELERY_LOGFILE_NAME))
 
 USER_ACTIVATION_URL = env.str('USER_ACTIVATION_URL', '')
+
+# MailJet API
+MAILJET_PUBLIC_KEY = env.str('MAILJET_PUBLIC_KEY', '')
+MAILJET_SECRET_KEY = env.str('MAILJET_SECRET_KEY', '')
+MAILJET_USER = env.str('MAILJET_USER', '')
