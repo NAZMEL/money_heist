@@ -1,7 +1,7 @@
 # Money Heist
 The Money Heist is a spending tracking application. The project is being used to track your incomes spending and current balance. 
 
-## User can<hr>
+## User can
 - add spending;
 - select category of spending;
 - select and change date;
