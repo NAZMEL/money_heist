@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     # Custom apps
     'authentication',
     'user_profile',
+    'spendings',
 ]
 
 MIDDLEWARE = [
