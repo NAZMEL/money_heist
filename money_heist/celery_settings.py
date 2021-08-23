@@ -4,7 +4,7 @@ import celery
 from celery import Celery
 
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'money_heist.settings')
-
+print(celery)
 
 @celery.signals.setup_logging.connect
 def on_celery_setup_logging(**kwargs):
@@ -15,4 +15,4 @@ app = Celery('money_heist')
 
 app.config_from_object('django.conf:settings', namespace='CELERY')
 
-app.autodiscover_tasks(['money_heist'], )
+app.autodiscover_tasks(['money_heist'])

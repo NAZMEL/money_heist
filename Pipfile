@@ -17,6 +17,9 @@ httpie = "*"
 redis = "*"
 mailjet-rest = "*"
 celery = "*"
+docker = "*"
+docker-compose = "*"
+postgres = "*"
 
 [dev-packages]
 flake8 = "*"

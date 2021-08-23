@@ -1,4 +1,4 @@
-from rest_framework import viewsets, status, mixins, generics, serializers
+from rest_framework import viewsets, status, mixins, generics
 from rest_framework.permissions import IsAuthenticated, AllowAny
 from rest_framework.response import Response
 from authentication.models import User
@@ -16,6 +16,9 @@ class ProfileViewSet(mixins.RetrieveModelMixin,
 
     def get_object(self):
         return self.request.user
+    #
+    # def get_objects_all(self):
+    #     return self.queryset
 
     def destroy(self, request, *args, **kwargs):
         instance = self.get_object()
@@ -31,7 +34,7 @@ class ChangePasswordView(generics.UpdateAPIView):
 
 
 class UpdateProfileView(generics.UpdateAPIView):
-
     queryset = User.objects.all()
     permission_classes = (IsAuthenticated,)
     serializer_class = UpdateUserSerializer
+
