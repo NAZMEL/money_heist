@@ -2,7 +2,6 @@ from django.utils import timezone
 from rest_framework.test import APITestCase
 from rest_framework_simplejwt.settings import api_settings
 from rest_framework_simplejwt.tokens import AccessToken
-
 from authentication.models import User
 
 
