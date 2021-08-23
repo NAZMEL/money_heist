@@ -1,5 +1,3 @@
-from abc import ABC
-
 from django.conf import settings
 from django.utils.encoding import force_bytes, force_text
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
@@ -25,6 +23,7 @@ class SignUpSerializer(serializers.ModelSerializer):
         user.set_password(password)
         user.save()
 
+        # Creates a unique token to verify user via email
         token = f'{urlsafe_base64_encode(force_bytes(user.email))}.{TokenGenerator.make_token(user)}'
         url = f'{settings.USER_ACTIVATION_URL}?token={token}'
         context = {
@@ -32,8 +31,10 @@ class SignUpSerializer(serializers.ModelSerializer):
             'email': user.email
         }
 
+        # Template that sends to a user
         template = 'notifications/activate_user.html'
 
+        # Sends an email using Celery task and MailJet API
         send_email(
             subject="Activate your MoneyHeist account",
             template=template,
@@ -45,6 +46,15 @@ class SignUpSerializer(serializers.ModelSerializer):
 
 
 class ActivateUserSerializer(serializers.Serializer):
+
+    class Meta:
+        model = User
+        fields = ('id', 'email', 'password', 'is_active')
+        read_only_fields = ('id', )
+        extra_kwargs = {
+            'password': {'write_only': True}
+        }
+
     token = serializers.CharField()
     custom_fields = serializers.SerializerMethodField()
 

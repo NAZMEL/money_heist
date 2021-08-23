@@ -16,7 +16,7 @@ class BaseAPITest(APITestCase):
 
         return user
 
-    def create_and_login(self, email, password):  # nosec
+    def create_and_login(self, email, password):
         user = self.create(email=email, password=password)
         self.authorize(user)
         return user
