@@ -11,17 +11,6 @@ The Money Heist is a spending tracking application. The project is being used to
 - filter by category or sending date;
 - to export all spendings into .csv file
 
-## Packages
-+ `django`
-+ `environs`
-+ `psycopg2-binary`
-+ `django-cors-headers `
-+ `djangorestframework-simplejwt`
-+ `djangorestframework-camel-case`
-+ `drf-yasg`
-+ `celery`
-+ `redis`
-
 ## Development
 + Python 3.9
 + Docker
