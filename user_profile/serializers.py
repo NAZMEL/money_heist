@@ -62,4 +62,4 @@ class UpdateUserSerializer(serializers.ModelSerializer):
         instance.email = validated_data['email']
 
         instance.save()
-        return instance
+        return instance, Response(status=status.HTTP_201_CREATED), "Email successfully changed"
