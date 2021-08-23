@@ -38,7 +38,8 @@ class ChangePasswordSerializer(serializers.ModelSerializer):
     def update(self, instance, validated_data):
         instance.set_password(validated_data['password'])
         instance.save()
-        return instance, Response(status=status.HTTP_201_CREATED)
+        # Why nothing prints out?
+        return instance, Response(status=status.HTTP_201_CREATED), "Password successfully changed"
 
 
 class UpdateUserSerializer(serializers.ModelSerializer):
@@ -61,5 +62,4 @@ class UpdateUserSerializer(serializers.ModelSerializer):
         instance.email = validated_data['email']
 
         instance.save()
-        return instance
-
+        return instance, Response(status=status.HTTP_201_CREATED), "Email successfully changed"
