@@ -2,13 +2,14 @@
 # Edits from Max:
 .idea
 .idea/vcs.xml
+.idea/misc.xml
+.idea/money_heist.iml
 .DS_Store
 .data
 idea/
 data/
 .idea/
 .data/
-.money_heist-JanCN-_C/
 
 
 ### Django ###
