@@ -3,8 +3,8 @@ import os
 import celery
 from celery import Celery
 
+
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'money_heist.settings')
-print(celery)
 
 @celery.signals.setup_logging.connect
 def on_celery_setup_logging(**kwargs):
