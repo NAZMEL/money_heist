@@ -1,0 +1,15 @@
+- Refactor code, delete unused files, add comments to functions
+- Add Change email endpoint
+- Add Change password endpoint
+- Add Sign-Up, implement MailJet
+- Add tasks
+- Add Get Users data endpoint
+- Add Sign-Up function
+- Add Celery
+- Fix bugs in tests
+- Add tests for user's authentication
+- Add auth, fix bugs
+- Add update and partial_update methods to ProfileViewSet, add endpoints for profile/, auth/, etc
+- Fix CustomUserModel class, add user_profile app
+- Add Authentication app, level Architecture UML tables
+- Install project
