@@ -35,7 +35,7 @@ class SignUpSerializer(serializers.ModelSerializer):
         template = 'notifications/activate_user.html'
 
         # Sends an email using Celery task and MailJet API
-        send_email(
+        send_email.delay(
             subject="Activate your MoneyHeist account",
             template=template,
             recipients=[user.email],

@@ -1,4 +1,6 @@
 from rest_framework import serializers
+from rest_framework.decorators import action
+
 from spendings.models import Spending, SpendingCategory
 
 
@@ -6,8 +8,14 @@ class SpendingCategorySerializer(serializers.ModelSerializer):
 
     class Meta:
         model = SpendingCategory
-        fields = ('id', 'name')
+        fields = ('id', 'name', 'pk')
         read_only_fields = ('id', )
+
+    # @action(methods=['POST'], detail=False)
+    def create(self, validated_data):
+        category = SpendingCategory(**validated_data)
+        category.save()
+        return category
 
 
 class SpendingSerializer(serializers.ModelSerializer):
@@ -23,7 +31,6 @@ class SpendingSerializer(serializers.ModelSerializer):
         return spending
 
 
-
 class SpendingUpdateSerializer(serializers.ModelSerializer):
 
     class Meta:
@@ -34,5 +41,8 @@ class SpendingUpdateSerializer(serializers.ModelSerializer):
     def update(self, instance, validated_data):
         instance = Spending(**validated_data)
         instance.save()
+
+
+
 
 

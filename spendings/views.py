@@ -1,7 +1,7 @@
 from rest_framework import viewsets
 from rest_framework.permissions import IsAuthenticated
-from .serializers import SpendingSerializer
-from .models import Spending
+from .serializers import SpendingSerializer, SpendingCategorySerializer
+from .models import Spending, SpendingCategory
 
 
 class SpendingsViewSet(viewsets.ModelViewSet):
@@ -15,3 +15,17 @@ class SpendingsViewSet(viewsets.ModelViewSet):
     def perform_create(self, serializer):
         serializer.save(user=self.request.user)
 
+    def perform_update(self, serializer):
+        serializer.save(user=self.request.user)
+
+
+class SpendingCategoryViewSet(viewsets.ModelViewSet):
+
+    permission_classes = (IsAuthenticated, )
+    serializer_class = SpendingCategorySerializer
+
+    def get_queryset(self):
+        return SpendingCategory.objects.all()
+
+    def perform_create(self, serializer):
+        serializer.save(user=self.request.user)
