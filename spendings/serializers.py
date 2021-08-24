@@ -11,7 +11,6 @@ class SpendingCategorySerializer(serializers.ModelSerializer):
         fields = ('id', 'name', 'pk')
         read_only_fields = ('id', )
 
-    # @action(methods=['POST'], detail=False)
     def create(self, validated_data):
         category = SpendingCategory(**validated_data)
         category.save()
@@ -31,18 +30,13 @@ class SpendingSerializer(serializers.ModelSerializer):
         return spending
 
 
-class SpendingUpdateSerializer(serializers.ModelSerializer):
-
-    class Meta:
-        model = Spending
-        fields = ('id', 'amount', 'description', 'category', 'created_at')
-        read_only_fields = ('id',)
-
-    def update(self, instance, validated_data):
-        instance = Spending(**validated_data)
-        instance.save()
-
-
-
-
-
+# class SpendingUpdateSerializer(serializers.ModelSerializer):
+#
+#     class Meta:
+#         model = Spending
+#         fields = ('id', 'amount', 'description', 'category', 'created_at')
+#         read_only_fields = ('id',)
+#
+#     def update(self, instance, validated_data):
+#         instance = Spending(**validated_data)
+#         instance.save()
