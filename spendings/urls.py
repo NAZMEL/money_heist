@@ -1,7 +1,9 @@
-from django.urls import path
+from rest_framework.routers import SimpleRouter
+from spendings import views
 
-app_name = 'spendinds'
+app_name = "spendings"
+router = SimpleRouter(trailing_slash=True)
 
-urlpatterns = [
-    path('', name='obtain'),
-]
+router.register('', views.SpendingsViewSet, basename='spendings')
+
+urlpatterns = [] + router.urls
