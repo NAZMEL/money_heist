@@ -3,7 +3,7 @@ from django.db import models
 
 class SpendingCategory(models.Model):
     name = models.CharField("Name", max_length=100, unique=True)
-    user = models.ForeignKey('authentication.User', on_delete=models.CASCADE, null=True)
+    user = models.ForeignKey("authentication.User", on_delete=models.CASCADE, null=True)
 
     def __str__(self):
         return self.name
