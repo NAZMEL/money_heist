@@ -16,9 +16,6 @@ class ProfileViewSet(mixins.RetrieveModelMixin,
 
     def get_object(self):
         return self.request.user
-    #
-    # def get_objects_all(self):
-    #     return self.queryset
 
     def destroy(self, request, *args, **kwargs):
         instance = self.get_object()

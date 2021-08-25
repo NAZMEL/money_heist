@@ -28,8 +28,3 @@ class Spending(models.Model):
         db_table = "spendings"
         verbose_name = "Spending"
         verbose_name_plural = "Spendings"
-
-
-
-
-
