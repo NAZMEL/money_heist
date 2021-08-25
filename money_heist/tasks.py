@@ -50,3 +50,4 @@ def send_email(self, subject, template, recipients, context):
             self.retry(countdown=30)
         except MaxRetriesExceededError as e:
             logger.error(e)
+

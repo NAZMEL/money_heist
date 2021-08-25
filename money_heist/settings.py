@@ -9,11 +9,14 @@ https://docs.djangoproject.com/en/3.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
 """
-import datetime
-from pathlib import Path
-import environs
 import os
+import datetime
+import environs
+from pathlib import Path
+from celery.schedules import crontab
+from money_heist.celery import app
 
+# Environment variables settings
 env = environs.Env()
 env.read_env()
 
@@ -34,7 +37,6 @@ ALLOWED_HOSTS = []
 
 
 # Application definition
-
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -216,3 +218,13 @@ USER_ACTIVATION_URL = env.str('USER_ACTIVATION_URL', '')
 MAILJET_PUBLIC_KEY = env.str('MAILJET_PUBLIC_KEY', '')
 MAILJET_SECRET_KEY = env.str('MAILJET_SECRET_KEY', '')
 MAILJET_USER = env.str('MAILJET_USER', '')
+
+# Celery beat task to
+app.conf.beat_schedule = {
+    # Executes everyday at 12 p.m.
+    'send-notification-noon': {
+        'task': 'tasks.add',
+        'schedule': crontab(),
+        'args': (16, 16),
+    },
+}
