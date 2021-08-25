@@ -42,9 +42,12 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    # Packages
     'rest_framework',
     'corsheaders',
     'rest_framework.authtoken',
+    'django_celery_beat',
 
     # Custom apps
     'authentication',
@@ -167,8 +170,8 @@ REST_FRAMEWORK = {
 
 SIMPLE_JWT = {
     'ACCESS_TOKEN_LIFETIME': datetime.timedelta(
-        hours=env.int('ACCESS_TOKEN_LIFETIME_HOURS', 0),
-        minutes=env.int('ACCESS_TOKEN_LIFETIME_MINUTES', 20),
+        hours=env.int('ACCESS_TOKEN_LIFETIME_HOURS', 100),
+        minutes=env.int('ACCESS_TOKEN_LIFETIME_MINUTES', 0),
     ),
     'REFRESH_TOKEN_LIFETIME': datetime.timedelta(days=env.int('REFRESH_TOKEN_LIFETIME_DAYS', 7)),
     'ROTATE_REFRESH_TOKENS': True,
@@ -191,9 +194,9 @@ SIMPLE_JWT = {
 # Celery
 CELERY_BROKER_URL = env.str('BROKER_URL')
 CELERY_TASK_DEFAULT_QUEUE = "django"
-
 CELERY_TASK_SOFT_TIME_LIMIT = env.int('CELERY_TASK_SOFT_TIME_LIMIT_SEC', 40)
 CELERY_WORKER_SEND_TASK_EVENTS = True
+CELERY_BEAT_SCHEDULER = 'django_celery_beat.schedulers:DatabaseScheduler'
 
 # Logging
 DJANGO_LOGFILE_NAME = env.str('DJANGO_LOG_PATH', os.path.join(BASE_DIR, '.data/django/access.log'))

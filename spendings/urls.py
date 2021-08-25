@@ -4,6 +4,7 @@ from spendings import views
 app_name = "spendings"
 router = SimpleRouter(trailing_slash=True)
 
-router.register('create', views.SpendingsViewSet, basename='create-spending')
-router.register('update', views.SpendingsViewSet, basename='update-spending')
-router.register('category', views.SpendingCategoryViewSet, basename='category')
+router.register('categories', views.SpendingCategoryViewSet, basename='categories')
+router.register('', views.SpendingsViewSet, basename='spending')
+
+urlpatterns = [] + router.urls
