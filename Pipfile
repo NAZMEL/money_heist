@@ -20,6 +20,8 @@ celery = "*"
 docker = "*"
 docker-compose = "*"
 postgres = "*"
+django-celery-beat = "*"
+django-celery-results = "*"
 
 [dev-packages]
 flake8 = "*"

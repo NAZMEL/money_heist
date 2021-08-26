@@ -3,7 +3,7 @@ from django.db import models
 
 class SpendingCategory(models.Model):
     name = models.CharField("Name", max_length=100, unique=True)
-    user = models.ForeignKey("authentication.User", on_delete=models.CASCADE, null=True)
+    user = models.ForeignKey("authentication.User", on_delete=models.CASCADE, null=True, related_name="categories")
 
     def __str__(self):
         return self.name
@@ -19,7 +19,7 @@ class Spending(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     description = models.TextField("Description", null=True, blank=True)
     category = models.ForeignKey("SpendingCategory", on_delete=models.SET_NULL, null=True)
-    user = models.ForeignKey("authentication.User", on_delete=models.CASCADE, null=True)
+    user = models.ForeignKey("authentication.User", on_delete=models.CASCADE, null=True, related_name="spendings")
 
     def __str__(self):
         return str(self.amount)
