@@ -13,7 +13,7 @@ logger = logging.getLogger('celery')
 @shared_task(bind=True, max_retries=3)
 def send_email(self, subject, template, recipients, context):
     """
-    Sending email
+    Sending email after sign up
     :param self:
     :param subject: message title
     :param template: name of template
@@ -50,3 +50,4 @@ def send_email(self, subject, template, recipients, context):
             self.retry(countdown=30)
         except MaxRetriesExceededError as e:
             logger.error(e)
+
