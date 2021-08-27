@@ -10,7 +10,7 @@ class SpendingsViewSet(viewsets.ModelViewSet):
     serializer_class = SpendingSerializer
 
     def get_queryset(self):
-        return Spending.objects.filter()
+        return Spending.objects.filter(user=self.request.user)
 
     def perform_create(self, serializer):
         serializer.save(user=self.request.user)
@@ -25,7 +25,7 @@ class SpendingCategoryViewSet(viewsets.ModelViewSet):
     serializer_class = SpendingCategorySerializer
 
     def get_queryset(self):
-        return SpendingCategory.objects.filter()
+        return SpendingCategory.objects.filter(user=self.request.user)
 
     def perform_create(self, serializer):
         serializer.save(user=self.request.user)

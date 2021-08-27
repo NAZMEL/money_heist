@@ -1,5 +1,7 @@
+from django.db import IntegrityError
 from rest_framework import serializers
 
+from authentication.models import User
 from spendings.models import Spending, SpendingCategory
 
 
@@ -11,8 +13,18 @@ class SpendingCategorySerializer(serializers.ModelSerializer):
         read_only_fields = ('id', )
 
     def create(self, validated_data):
-        category = SpendingCategory(**validated_data)
-        category.save()
+
+        try:
+            category = SpendingCategory(**validated_data)
+            category.save()
+
+        except IntegrityError as err:
+            name_category = validated_data.get('name')
+            user_id = validated_data.get('user').pk
+            user = User.objects.get(pk=user_id)
+
+            raise serializers.ValidationError(f"The {name_category} already exists for {user.email}!")
+
         return category
 
 

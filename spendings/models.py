@@ -1,17 +1,22 @@
 from django.db import models
+from django.core.exceptions import ValidationError
 
 
 class SpendingCategory(models.Model):
-    name = models.CharField("Name", max_length=100, unique=True)
+    name = models.CharField("Name", max_length=100)
     user = models.ForeignKey("authentication.User", on_delete=models.CASCADE, null=True, related_name="categories")
 
     def __str__(self):
         return self.name
 
+
     class Meta:
         db_table = "spendings_categories"
         verbose_name = "Category"
         verbose_name_plural = "Categories"
+        unique_together = ('user', 'name')
+
+
 
 
 class Spending(models.Model):
@@ -28,3 +33,4 @@ class Spending(models.Model):
         db_table = "spendings"
         verbose_name = "Spending"
         verbose_name_plural = "Spendings"
+
