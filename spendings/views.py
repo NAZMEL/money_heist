@@ -15,7 +15,6 @@ class SpendingsViewSet(viewsets.ModelViewSet):
     filter_backends = (DjangoFilterBackend, )
     filterset_class = SpendingFilter
 
-
     def get_queryset(self):
         return Spending.objects.filter(user=self.request.user)
 

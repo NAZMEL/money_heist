@@ -8,14 +8,17 @@ class CharFilterInFilter(filters.BaseInFilter, filters.CharFilter):
 
 
 class SpendingFilter(filters.FilterSet):
-    category = CharFilterInFilter(field_name='category__name', lookup_expr='in')
-    description = filters.CharFilter(field_name='description', lookup_expr='icontains', method='get_lower_case')
+    category = filters.CharFilter(field_name='category__name', lookup_expr='icontains')
     ordering = filters.OrderingFilter(fields={'id': 'order_id'})
-    created_at = filters.RangeFilter()
+    start_date = filters.DateFilter(field_name='created_at', lookup_expr='gt')
+    exact_date = filters.DateFilter(field_name='created_at', lookup_expr='startswith')
+    end_date = filters.DateFilter(field_name='created_at', lookup_expr='lt')
+
+    description = filters.CharFilter(field_name='description', lookup_expr='icontains')
+    amount_more_than = filters.NumberFilter(field_name='amount', lookup_expr='gte')
+    amount_less_than = filters.NumberFilter(field_name='amount', lookup_expr='lte')
+    amount_exact = filters.NumberFilter(field_name='amount', lookup_expr='exact')
 
     class Meta:
         model = Spending
-        fields = ('amount', 'description', 'created_at')
-
-    def get_lower_case(self, queryset, name, value):
-        return queryset.filter(note__contains=value.lower())
+        fields = ('amount', 'category', 'description', 'created_at')
