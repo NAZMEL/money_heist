@@ -51,6 +51,7 @@ INSTALLED_APPS = [
     'django_celery_beat',
     'django_filters',
     'rest_framework_csv',
+    'drf_yasg',
 
     # Custom apps
     'authentication',
@@ -131,7 +132,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'Europe/Kiev'
+TIME_ZONE = 'UTC'
 
 USE_I18N = True
 
@@ -200,7 +201,6 @@ CELERY_TASK_DEFAULT_QUEUE = "django"
 CELERY_TASK_SOFT_TIME_LIMIT = env.int('CELERY_TASK_SOFT_TIME_LIMIT_SEC', 40)
 CELERY_WORKER_SEND_TASK_EVENTS = True
 CELERY_BEAT_SCHEDULER = 'django_celery_beat.schedulers:DatabaseScheduler'
-CELERY_TIMEZONE = 'Europe/Kiev'
 
 # Logging
 DJANGO_LOGFILE_NAME = env.str('DJANGO_LOG_PATH', os.path.join(BASE_DIR, '.data/django/access.log'))

@@ -1,4 +1,5 @@
 from django_filters.rest_framework import DjangoFilterBackend
+from drf_yasg.utils import swagger_auto_schema
 from rest_framework import viewsets
 from rest_framework.decorators import action
 from rest_framework.permissions import IsAuthenticated, AllowAny
@@ -6,13 +7,15 @@ from rest_framework.response import Response
 from rest_framework_csv.renderers import CSVRenderer
 from django.http import HttpResponse
 
-from .serializers import SpendingSerializer, SpendingCategorySerializer
-from .models import Spending, SpendingCategory
-from .filters import SpendingFilter
+from spendings.serializers import SpendingSerializer, SpendingCategorySerializer
+from spendings.models import Spending, SpendingCategory
+from spendings.filters import SpendingFilter
 
 
 class SpendingsViewSet(viewsets.ModelViewSet):
-
+    """
+    Takes JWT token for authorization.
+    """
     permission_classes = (IsAuthenticated, )
     serializer_class = SpendingSerializer
     filter_backends = (DjangoFilterBackend, )
@@ -29,7 +32,10 @@ class SpendingsViewSet(viewsets.ModelViewSet):
 
 
 class SpendingCategoryViewSet(viewsets.ModelViewSet):
-
+    """
+    Takes JWT token for authorization.
+    Returns list of all categories
+    """
     permission_classes = (IsAuthenticated, )
     serializer_class = SpendingCategorySerializer
 
