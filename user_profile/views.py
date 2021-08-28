@@ -1,5 +1,7 @@
 from rest_framework import viewsets, mixins, generics
 from rest_framework.permissions import IsAuthenticated, AllowAny
+from rest_framework.response import Response
+
 
 from authentication.models import User
 from user_profile.serializers import UserSerializer, ChangePasswordSerializer, UpdateUserSerializer
@@ -30,6 +32,7 @@ class ChangePasswordView(generics.UpdateAPIView):
     and password1 equal to password2.
     Returns the user profile fields: id, email, is_active
     """
+    queryset = User.objects.all()
     permission_classes = (IsAuthenticated,)
     serializer_class = ChangePasswordSerializer
 

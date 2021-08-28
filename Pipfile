@@ -22,11 +22,13 @@ docker-compose = "*"
 postgres = "*"
 django-celery-beat = "*"
 django-celery-results = "*"
+mixer = "*"
 django-filter = "*"
 coverage = "*"
 
 [dev-packages]
 flake8 = "*"
+mixer = "*"
 
 [requires]
 python_version = "3.9"

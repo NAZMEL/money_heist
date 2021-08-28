@@ -18,7 +18,7 @@ logger = logging.getLogger('celery')
 
 @shared_task(bind=True, max_retries=3)
 def send_notification_noon(self):
-    time = datetime.datetime.now() - datetime.timedelta(hours=12)
+    time = datetime.datetime.now() - datetime.timedelta(hours=1)
 
     # Get the emails of all the users that didn't create any spendings during last {time}
     recipients = User.objects.annotate(max_date=Max('spendings__created_at')).filter(max_date__date__lt=time).values_list('email', flat=True)
