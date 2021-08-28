@@ -23,7 +23,7 @@ postgres = "*"
 django-celery-beat = "*"
 django-celery-results = "*"
 django-filter = "*"
-
+coverage = "*"
 
 [dev-packages]
 flake8 = "*"

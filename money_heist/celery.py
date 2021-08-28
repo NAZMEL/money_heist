@@ -14,14 +14,12 @@ app = Celery('money_heist')
 # - namespace='CELERY' means all celery-related configuration keys
 #   should have a `CELERY_` prefix.
 app.config_from_object('django.conf:settings', namespace='CELERY')
-app.conf.update(timezone='Europe/Kiev')
-app.conf.timezone = 'Europe/Kiev'
 
 # Celery Beat schedule
 app.conf.beat_schedule = {
     'send_notification_noon': {
         'task': 'spendings.tasks.send_notification_noon',
-        'schedule': crontab(hour=12),
+        'schedule': crontab(hour=9, minute=0),
     }
 }
 

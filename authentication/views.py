@@ -18,11 +18,20 @@ class RefreshJSONWebToken(TokenRefreshView):
 
 
 class SignUpView(CreateAPIView):
+    """
+    Takes a set of user credentials and creates a user in the database.
+    Activates the Celery task to send an email with the  activation link
+    which contains token for activation.
+    """
     serializer_class = SignUpSerializer
     permission_classes = (AllowAny, )
 
 
 class ActivateUserView(APIView):
+    """
+    Takes user's JWT token and activates the user by toggling
+    the 'is_active' tumbler from OFF to ON state.
+    """
     serializer_class = ActivateUserSerializer
     permission_classes = (AllowAny,)
 

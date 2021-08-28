@@ -1,4 +1,5 @@
 from django.urls import path
+
 from user_profile.views import ProfileViewSet, ChangePasswordView, UpdateProfileView
 
 app_name = 'user_profile'

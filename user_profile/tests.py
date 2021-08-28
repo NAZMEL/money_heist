@@ -1,6 +1,7 @@
 from django.contrib.auth.hashers import check_password
 from unittest.mock import patch
 from rest_framework.reverse import reverse
+
 from money_heist.tests import BaseAPITest
 
 

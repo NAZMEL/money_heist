@@ -1,4 +1,5 @@
 from rest_framework.routers import SimpleRouter
+
 from spendings import views
 
 app_name = "spendings"
