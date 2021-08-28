@@ -8,7 +8,7 @@ class Migration(migrations.Migration):
 
     dependencies = [
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
-        ('spendings', '0002_auto_20210826_1932'),
+        ('spendings', '0006_alter_spendingcategory_name'),
     ]
 
     operations = [

@@ -7,7 +7,7 @@ from spendings.models import Spending, SpendingCategory
 from authentication.models import User
 from money_heist.tests import BaseAPITest
 
-#
+
 # class TestSpendingsViewSet(BaseAPITest):
 #
 #     def setUp(self):
