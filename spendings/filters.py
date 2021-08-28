@@ -1,10 +1,6 @@
 import django_filters as filters
 
-from .models import Spending
-
-
-class CharFilterInFilter(filters.BaseInFilter, filters.CharFilter):
-    pass
+from spendings.models import Spending
 
 
 class SpendingFilter(filters.FilterSet):

@@ -43,7 +43,7 @@ class TestRefreshJSONWebToken(BaseAPITest):
         self.user = self.create(self.email, self.password)
         self.refresh_token = str(RefreshToken.for_user(self.user))
 
-    def test_get_access_token(self):
+    def test_get_access_token_refresh(self):
         response = self.client.post(self.reverse_url, data={'refresh': self.refresh_token})
         self.assertIn('access', response.data)
 
@@ -74,6 +74,18 @@ class TestSignUpView(APITestCase):
 
     def test_user_signup_with_bad_request(self):
         response = self.client.post(self.reverse_url)
+        self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
+
+    def test_user_signup_with_incorrect_email(self):
+        data = {
+            'email': None,
+            'password': 'any_password'
+        }
+        response = self.client.post(
+            self.reverse_url,
+            data,
+            format="json"
+        )
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
 
     def test_user_signup_with_incorrect_password(self):
@@ -135,4 +147,3 @@ class TestSignUpView(APITestCase):
             format="json"
         )
         self.assertEqual(response.status_code, status.HTTP_200_OK)
-

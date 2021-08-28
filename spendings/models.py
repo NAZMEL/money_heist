@@ -19,7 +19,7 @@ class Spending(models.Model):
     amount = models.FloatField(verbose_name="amount")
     created_at = models.DateTimeField(auto_now_add=True)
     description = models.TextField("Description", null=True, blank=True)
-    category = models.ForeignKey("SpendingCategory", on_delete=models.SET_NULL, null=True)
+    category = models.ForeignKey("SpendingCategory", on_delete=models.SET_NULL, null=True, related_name="spendings")
     user = models.ForeignKey("authentication.User", on_delete=models.CASCADE, null=True, related_name="spendings")
 
     def __str__(self):

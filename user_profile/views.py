@@ -1,4 +1,4 @@
-from rest_framework import viewsets, status, mixins, generics
+from rest_framework import viewsets, mixins, generics, status
 from rest_framework.permissions import IsAuthenticated, AllowAny
 from rest_framework.response import Response
 
@@ -10,10 +10,15 @@ class ProfileViewSet(mixins.RetrieveModelMixin,
                      mixins.UpdateModelMixin,
                      mixins.DestroyModelMixin,
                      viewsets.GenericViewSet):
-
+    """
+    Takes a set of user credentials along with the JWT token.
+    Returns the user profile fields: id, email, is_active
+    """
     permission_classes = (AllowAny, )
-    queryset = User.objects.all()
     serializer_class = UserSerializer
+
+    def get_queryset(self):
+        return User.objects.filter(id=self.request.user.id)
 
     def get_object(self):
         return self.request.user
@@ -25,12 +30,27 @@ class ProfileViewSet(mixins.RetrieveModelMixin,
 
 
 class ChangePasswordView(generics.UpdateAPIView):
-    queryset = User.objects.all()
+    """
+    Takes the JWT token for authorization along with old password
+    and new password entered 2 times. Old_password must be valid,
+    and password1 equal to password2.
+    Returns the user profile fields: id, email, is_active
+    """
     permission_classes = (IsAuthenticated,)
     serializer_class = ChangePasswordSerializer
 
+    def get_queryset(self):
+        return User.objects.filter(pk=self.request.user.id)
+
 
 class UpdateProfileView(generics.UpdateAPIView):
-    queryset = User.objects.all()
+    """
+    Takes the JWT token for authorization along with
+    password and new email address.
+    Returns the new email.
+    """
     permission_classes = (IsAuthenticated,)
     serializer_class = UpdateUserSerializer
+
+    def get_queryset(self):
+        return User.objects.filter(pk=self.request.user.id)

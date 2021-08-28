@@ -2,6 +2,7 @@ from django.conf import settings
 from django.utils.encoding import force_bytes, force_text
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from rest_framework import serializers
+
 from authentication.models import User
 from authentication.tokens import TokenGenerator
 from money_heist.tasks import send_email

@@ -24,6 +24,8 @@ django-celery-beat = "*"
 django-celery-results = "*"
 mixer = "*"
 django-filter = "*"
+djangorestframework-csv = "*"
+coverage = "*"
 
 [dev-packages]
 flake8 = "*"
