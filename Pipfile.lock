@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "a45e9a2364737c5c2a5078d0c8f8195844920f6e9d1c0e761cf54940b3cbcedc"
+            "sha256": "b1dcbdc1bbd7511c289ac4ecc574a92d46228d0dc34c933b535fd242ca6bb45a"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -260,6 +260,13 @@
             ],
             "index": "pypi",
             "version": "==1.2.0"
+        },
+        "djangorestframework-csv": {
+            "hashes": [
+                "sha256:aa0ee4c894fe319c68e042b05c61dace43a9fb6e6872e1abe1724ca7ea4d15f7"
+            ],
+            "index": "pypi",
+            "version": "==2.1.1"
         },
         "djangorestframework-simplejwt": {
             "hashes": [
@@ -694,10 +701,10 @@
         },
         "ruamel.yaml": {
             "hashes": [
-                "sha256:4185fcfa9e037fea9ffd0bb6172354a03ec98c21e462355d72e068c74e493512",
-                "sha256:b59c548ba6a2a99a97a842db2321c5adf28470d1decb04bdd82ce9535936a2fa"
+                "sha256:7c64b97d4f4588410f19c4f259e4f724803b1981334654f516936f5c5710fe2a",
+                "sha256:c61a0d2d01a64094f0843e2721968e5ee2de93fc220ab6eeae2d1bd121e6e2b3"
             ],
-            "version": "==0.17.14"
+            "version": "==0.17.15"
         },
         "ruamel.yaml.clib": {
             "hashes": [
@@ -754,6 +761,12 @@
                 "sha256:dd2b0eaebb2a9e167d1cefedab4700e5dcbdb076114eed30b58b97ed6b37d6f2"
             ],
             "version": "==1.6.4"
+        },
+        "unicodecsv": {
+            "hashes": [
+                "sha256:018c08037d48649a0412063ff4eda26eaa81eff1546dbffa51fa5293276ff7fc"
+            ],
+            "version": "==0.14.1"
         },
         "uritemplate": {
             "hashes": [

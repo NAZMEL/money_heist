@@ -50,6 +50,7 @@ INSTALLED_APPS = [
     'rest_framework.authtoken',
     'django_celery_beat',
     'django_filters',
+    'rest_framework_csv',
 
     # Custom apps
     'authentication',
@@ -158,6 +159,7 @@ REST_FRAMEWORK = {
     ),
     'DEFAULT_RENDERER_CLASSES': (
         'djangorestframework_camel_case.render.CamelCaseJSONRenderer',
+        'rest_framework_csv.renderers.CSVRenderer',
     ),
     'DEFAULT_PARSER_CLASSES': (
         'djangorestframework_camel_case.parser.CamelCaseJSONParser',

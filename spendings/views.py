@@ -1,7 +1,10 @@
 from django_filters.rest_framework import DjangoFilterBackend
-
 from rest_framework import viewsets
-from rest_framework.permissions import IsAuthenticated
+from rest_framework.decorators import action
+from rest_framework.permissions import IsAuthenticated, AllowAny
+from rest_framework.response import Response
+from rest_framework_csv.renderers import CSVRenderer
+from django.http import HttpResponse
 
 from .serializers import SpendingSerializer, SpendingCategorySerializer
 from .models import Spending, SpendingCategory
@@ -35,3 +38,29 @@ class SpendingCategoryViewSet(viewsets.ModelViewSet):
 
     def perform_create(self, serializer):
         serializer.save(user=self.request.user)
+
+
+class ExportViewSet(viewsets.ModelViewSet):
+
+    permission_classes = (IsAuthenticated,)
+
+    def get_queryset(self):
+        return Spending.objects.filter(user=self.request.user)
+
+
+    class SpendingRenderer(CSVRenderer):
+        header = ['Amount', 'User', 'Category', 'Description', 'Created at']
+
+    renderer_classes = (SpendingRenderer,)
+
+    @action(methods=['GET'], detail=False, url_path='export-csv', url_name='export-csv')
+    def export_csv(self, request):
+        spendings = Spending.objects.filter(user=self.request.user)
+        content = [{
+            'Amount': spending.amount,
+            'Category': spending.category.name,
+            'Description': spending.description,
+            'User': spending.user.email,
+            'Created at': spending.created_at.strftime('%d, %b %Y - %Hh %Mm')
+        } for spending in spendings]
+        return Response(content)

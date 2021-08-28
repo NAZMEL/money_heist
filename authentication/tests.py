@@ -147,4 +147,3 @@ class TestSignUpView(APITestCase):
             format="json"
         )
         self.assertEqual(response.status_code, status.HTTP_200_OK)
-
