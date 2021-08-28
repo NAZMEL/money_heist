@@ -1,9 +1,11 @@
 import logging
+
 from celery import shared_task
 from celery.exceptions import MaxRetriesExceededError, SoftTimeLimitExceeded
 from django.template.loader import render_to_string
 from django.conf import settings
 from mailjet_rest import Client
+
 from money_heist.constants import MAILJET_API_VERSION
 
 
@@ -50,4 +52,3 @@ def send_email(self, subject, template, recipients, context):
             self.retry(countdown=30)
         except MaxRetriesExceededError as e:
             logger.error(e)
-

@@ -1,5 +1,6 @@
 from django.urls import path
-from .views import TokenObtainPairView, TokenRefreshView, SignUpView, ActivateUserView
+
+from authentication.views import TokenObtainPairView, TokenRefreshView, SignUpView, ActivateUserView
 
 app_name = 'authentication'
 

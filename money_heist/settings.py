@@ -12,8 +12,10 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 import os
 import datetime
 import environs
-from pathlib import Path
+
 from celery.schedules import crontab
+from pathlib import Path
+
 from money_heist.celery import app
 
 # Environment variables settings
