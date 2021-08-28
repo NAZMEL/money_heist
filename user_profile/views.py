@@ -12,11 +12,13 @@ class ProfileViewSet(mixins.RetrieveModelMixin,
                      viewsets.GenericViewSet):
 
     permission_classes = (AllowAny, )
-    queryset = User.objects.all()
     serializer_class = UserSerializer
 
     def get_object(self):
         return self.request.user
+
+    def get_queryset(self):
+        return User.objects.filter(pk=self.request.user.id)
 
     def destroy(self, request, *args, **kwargs):
         instance = self.get_object()
@@ -25,12 +27,18 @@ class ProfileViewSet(mixins.RetrieveModelMixin,
 
 
 class ChangePasswordView(generics.UpdateAPIView):
-    queryset = User.objects.all()
+
     permission_classes = (IsAuthenticated,)
     serializer_class = ChangePasswordSerializer
 
+    def get_queryset(self):
+        return User.objects.filter(pk=self.request.user.id)
+
 
 class UpdateProfileView(generics.UpdateAPIView):
-    queryset = User.objects.all()
+
     permission_classes = (IsAuthenticated,)
     serializer_class = UpdateUserSerializer
+
+    def get_queryset(self):
+        return User.objects.filter(pk=self.request.user.id)

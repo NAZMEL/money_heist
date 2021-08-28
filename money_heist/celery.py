@@ -21,7 +21,7 @@ app.conf.timezone = 'Europe/Kiev'
 app.conf.beat_schedule = {
     'send_notification_noon': {
         'task': 'spendings.tasks.send_notification_noon',
-        'schedule': crontab(hour=11, minute=25),
+        'schedule': crontab(hour=11, minute=0),
     }
 }
 
