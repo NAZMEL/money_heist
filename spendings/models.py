@@ -17,8 +17,6 @@ class SpendingCategory(models.Model):
         unique_together = ('user', 'name')
 
 
-
-
 class Spending(models.Model):
     amount = models.FloatField(verbose_name="amount")
     created_at = models.DateTimeField(auto_now_add=True)

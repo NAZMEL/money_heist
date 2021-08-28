@@ -1,8 +1,9 @@
 from rest_framework.reverse import reverse
 from rest_framework import status
 from rest_framework_simplejwt.tokens import RefreshToken
-from money_heist.tests import BaseAPITest
 from rest_framework.test import APITestCase
+
+from money_heist.tests import BaseAPITest
 from .models import User
 
 
@@ -68,7 +69,6 @@ class TestSignUpView(APITestCase):
             self.data,
             format="json"
         )
-
         self.assertEqual(response.data['email'], self.data['email'])
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
 
@@ -83,7 +83,6 @@ class TestSignUpView(APITestCase):
             self.data,
             format="json"
         )
-
         response = self.client.post(
             reverse('v1:authentication:obtain'),
             data={
@@ -94,19 +93,30 @@ class TestSignUpView(APITestCase):
         )
         self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
 
-    def test_user_cannot_dignin_if_he_is_not_active(self):
+    def test_signup_user_exists(self):
+        self.client.post(
+            self.reverse_url,
+            self.data,
+            format="json"
+        )
+        response = self.client.post(
+            self.reverse_url,
+            self.data,
+            format="json"
+        )
+        self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
+
+    def test_user_cannot_signin_if_he_is_not_active(self):
         user = User.objects.create_user(
             email=self.email,
             password=self.password
         )
         user.save()
-
         response = self.client.post(
             reverse('v1:authentication:obtain'),
             self.data,
             format="json"
         )
-
         self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
 
     def test_user_signin_after_activation(self):
@@ -115,7 +125,6 @@ class TestSignUpView(APITestCase):
             self.data,
             format="json"
         )
-
         user = User.objects.get(email=self.email)
         user.is_active = True
         user.save()
@@ -126,3 +135,4 @@ class TestSignUpView(APITestCase):
             format="json"
         )
         self.assertEqual(response.status_code, status.HTTP_200_OK)
+

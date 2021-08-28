@@ -1,6 +1,7 @@
 from rest_framework import viewsets, status, mixins, generics
 from rest_framework.permissions import IsAuthenticated, AllowAny
 from rest_framework.response import Response
+
 from authentication.models import User
 from user_profile.serializers import UserSerializer, ChangePasswordSerializer, UpdateUserSerializer
 
@@ -24,7 +25,6 @@ class ProfileViewSet(mixins.RetrieveModelMixin,
 
 
 class ChangePasswordView(generics.UpdateAPIView):
-
     queryset = User.objects.all()
     permission_classes = (IsAuthenticated,)
     serializer_class = ChangePasswordSerializer
