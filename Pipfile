@@ -23,6 +23,7 @@ postgres = "*"
 django-celery-beat = "*"
 django-celery-results = "*"
 mixer = "*"
+django-filter = "*"
 
 [dev-packages]
 flake8 = "*"
