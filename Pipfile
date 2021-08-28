@@ -22,6 +22,8 @@ docker-compose = "*"
 postgres = "*"
 django-celery-beat = "*"
 django-celery-results = "*"
+django-filter = "*"
+
 
 [dev-packages]
 flake8 = "*"

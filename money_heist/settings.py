@@ -50,6 +50,7 @@ INSTALLED_APPS = [
     'corsheaders',
     'rest_framework.authtoken',
     'django_celery_beat',
+    'django_filters',
 
     # Custom apps
     'authentication',
