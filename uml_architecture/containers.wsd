@@ -67,5 +67,4 @@ Rel(admin, admin_site, "Uses the")
 
 ' Rel_R(api, stripe, "Subscribe to plans")
 
-
 @enduml
