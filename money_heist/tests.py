@@ -7,7 +7,9 @@ from authentication.models import User
 
 
 class BaseAPITest(APITestCase):
-
+    """
+    Base test class for using in other applications.
+    """
     def create(self, email, password):
         user = User.objects.create_user(email=email, password=password)
         user.last_login = timezone.now()

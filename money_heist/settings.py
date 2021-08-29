@@ -9,9 +9,9 @@ https://docs.djangoproject.com/en/3.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
 """
-import os
 import datetime
 import environs
+import os
 
 from celery.schedules import crontab
 from pathlib import Path
@@ -46,6 +46,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    # External packages
     'mixer',
     'rest_framework',
     'corsheaders',
@@ -55,7 +57,7 @@ INSTALLED_APPS = [
     'rest_framework_csv',
     'drf_yasg',
 
-    # Custom apps
+    # Internal modules
     'authentication',
     'user_profile',
     'spendings',

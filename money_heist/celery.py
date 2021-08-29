@@ -15,7 +15,7 @@ app = Celery('money_heist')
 #   should have a `CELERY_` prefix.
 app.config_from_object('django.conf:settings', namespace='CELERY')
 
-# Celery Beat schedule
+# Celery Beat schedule. Executes every day at 9:00 AM UTC (12:00 PM Ukraine time)
 app.conf.beat_schedule = {
     'send_notification_noon': {
         'task': 'spendings.tasks.send_notification_noon',
