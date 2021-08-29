@@ -18,6 +18,7 @@ class SpendingCategorySerializer(serializers.ModelSerializer):
             category = SpendingCategory(**validated_data)
             category.save()
 
+        # Exception that checks if the category name exists for a specific user
         except IntegrityError as err:
             name_category = validated_data.get('name')
             user_id = validated_data.get('user').pk

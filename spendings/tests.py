@@ -3,9 +3,9 @@ from django.urls import reverse
 from mixer.backend.django import mixer
 from rest_framework import status
 
-from spendings.models import Spending, SpendingCategory
 from authentication.models import User
 from money_heist.tests import BaseAPITest
+from spendings.models import Spending, SpendingCategory
 
 
 class TestSpendingsViewSet(BaseAPITest):

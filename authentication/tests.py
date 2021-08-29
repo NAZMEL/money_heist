@@ -1,10 +1,10 @@
-from rest_framework.reverse import reverse
 from rest_framework import status
-from rest_framework_simplejwt.tokens import RefreshToken
+from rest_framework.reverse import reverse
 from rest_framework.test import APITestCase
+from rest_framework_simplejwt.tokens import RefreshToken
 
 from money_heist.tests import BaseAPITest
-from .models import User
+from authentication.models import User
 
 
 class TestObtainTokenPair(BaseAPITest):

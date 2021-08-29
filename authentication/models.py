@@ -4,6 +4,10 @@ from django.db import models, transaction
 
 
 class UserManager(BaseUserManager):
+    """
+    ModeL for Admin of the website with the extended permissions (is_staff=True)
+    Can view all the users, manage their profiles, spendings, categories
+    """
 
     @transaction.atomic
     def create_user(self, email, password=None):
@@ -38,7 +42,10 @@ class UserManager(BaseUserManager):
 
 
 class User(AbstractBaseUser, PermissionsMixin):
-
+    """
+    Model for a user with the basic permissions (is_staff=False, is_superuser=False)
+    Required fields: email, password.
+    """
     email = models.EmailField(verbose_name='email address', max_length=255, unique=True)
     is_staff = models.BooleanField(default=False,
                                    help_text='Designates whether this user can access this admin site.',
