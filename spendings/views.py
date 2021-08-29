@@ -45,6 +45,10 @@ class SpendingCategoryViewSet(viewsets.ModelViewSet):
 
 
 class ExportViewSet(viewsets.ModelViewSet):
+    """
+    Takes JWT token for authorization.
+    Returns file .csv with all user's spendings
+    """
     permission_classes = (IsAuthenticated,)
 
     def get_queryset(self):

@@ -90,7 +90,6 @@ class TestSpendingsViewSet(BaseAPITest):
         self.assertEqual(response.status_code, status.HTTP_405_METHOD_NOT_ALLOWED)
 
 
-
 class TestSpendingsCategoriesViewSet(BaseAPITest):
 
     def setUp(self):
@@ -164,6 +163,22 @@ class TestSpendingsCategoriesViewSet(BaseAPITest):
         self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
 
 
+class TestExportViewSet(BaseAPITest):
+
+    def setUp(self):
+        self.email = 'test_email@gmail.com'
+        self.password = 'test_password'
+        self.user = self.create_and_login(email=self.email, password=self.password)
+        self.spending = mixer.blend(Spending, user=self.user)
+
+    def test_get_all_user_spendings(self):
+        response = self.client.get(reverse('v1:spendings:export-export-csv'))
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+
+    def test_get_all_user_spendings_when_logged_out(self):
+        self.logout()
+        response = self.client.get(reverse('v1:spendings:export-export-csv'))
+        self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
 
 
 
