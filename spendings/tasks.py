@@ -1,12 +1,12 @@
 import datetime
 import logging
 
-from celery import Celery, shared_task
-from celery.exceptions import MaxRetriesExceededError, SoftTimeLimitExceeded
 from django.conf import settings
 from django.db.models import Max
 from django.template.loader import render_to_string
 from mailjet_rest import Client
+from celery import Celery, shared_task
+from celery.exceptions import MaxRetriesExceededError, SoftTimeLimitExceeded
 
 from authentication.models import User
 from money_heist.constants import MAILJET_API_VERSION

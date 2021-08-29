@@ -2,6 +2,7 @@ from django.urls import path
 
 from authentication.views import TokenObtainPairView, TokenRefreshView, SignUpView, ActivateUserView
 
+
 app_name = 'authentication'
 
 urlpatterns = [

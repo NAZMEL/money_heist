@@ -1,10 +1,10 @@
 import logging
 
-from celery import shared_task
-from celery.exceptions import MaxRetriesExceededError, SoftTimeLimitExceeded
 from django.template.loader import render_to_string
 from django.conf import settings
 from mailjet_rest import Client
+from celery import shared_task
+from celery.exceptions import MaxRetriesExceededError, SoftTimeLimitExceeded
 
 from money_heist.constants import MAILJET_API_VERSION
 

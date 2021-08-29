@@ -13,7 +13,7 @@ class TestProfileViewSet(BaseAPITest):
         self.user = self.create_and_login(email=self.email, password=self.password)
 
     def test_get_profile_info(self):
-        response = self.client.get(reverse('v1:user_profile:user_info'))
+        response = self.client.get(reverse('v1:user_profile:user-info'))
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
     def test_get_profile_info_when_user_is_not_active(self):
@@ -21,7 +21,7 @@ class TestProfileViewSet(BaseAPITest):
         user.is_active = False
         user.save()
 
-        response = self.client.get(reverse('v1:user_profile:user_info'))
+        response = self.client.get(reverse('v1:user_profile:user-info'))
         self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
 
 
@@ -37,7 +37,7 @@ class TestUpdateProfileView(BaseAPITest):
             'email': 'new_email@gmail.com',
             'password': self.password
         }
-        response = self.client.patch(reverse('v1:user_profile:change_email', args=(self.user.id, )), data=data)
+        response = self.client.patch(reverse('v1:user_profile:change-email', args=(self.user.id, )), data=data)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
     def test_change_email_another_user(self):
@@ -49,7 +49,7 @@ class TestUpdateProfileView(BaseAPITest):
             'email': 'new_email@gmail.com',
             'password': self.password
         }
-        response = self.client.patch(reverse('v1:user_profile:change_email', args=(another_user.id,)), data=data)
+        response = self.client.patch(reverse('v1:user_profile:change-email', args=(another_user.id,)), data=data)
         self.assertEqual(response.status_code, status.HTTP_404_NOT_FOUND)
 
     def test_change_email_with_incorrect_data(self):
@@ -57,7 +57,7 @@ class TestUpdateProfileView(BaseAPITest):
             'email': None,
             'password': self.password
         }
-        response = self.client.patch(reverse('v1:user_profile:change_email', args=(self.user.id,)), data=data)
+        response = self.client.patch(reverse('v1:user_profile:change-email', args=(self.user.id,)), data=data)
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
 
 
@@ -70,18 +70,29 @@ class TestChangePasswordView(BaseAPITest):
 
     def test_change_password_user_success(self):
         data = {
-            'email': self.email,
-            'password': 'new_password'
+            'old_password': self.password,
+            'password': 'new_password',
+            'password2': 'new_password'
         }
-        response = self.client.patch(reverse('v1:user_profile:change_email', args=(self.user.id, )), data=data)
+        response = self.client.patch(reverse('v1:user_profile:change-password', args=(self.user.id, )), data=data)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
     def test_change_password_with_incorrect_data(self):
         data = {
-            'email': self.email,
-            'password': None
+            'old_password': self.password,
+            'password': None,
+            'password2': None
         }
-        response = self.client.patch(reverse('v1:user_profile:change_email', args=(self.user.id,)), data=data)
+        response = self.client.patch(reverse('v1:user_profile:change-password', args=(self.user.id,)), data=data)
+        self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
+
+    def test_change_password_with_different_new_password(self):
+        data = {
+            'old_password': self.password,
+            'password': 'new_password',
+            'password2': 'fail_password'
+        }
+        response = self.client.patch(reverse('v1:user_profile:change-password', args=(self.user.id,)), data=data)
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
 
 
