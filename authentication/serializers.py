@@ -60,6 +60,13 @@ class ActivateUserSerializer(serializers.Serializer):
     custom_fields = serializers.SerializerMethodField()
 
     def validate(self, attrs):
+        """
+        Method for validation.
+        Validates the token for authorizations
+        Validates email if email is in the database
+        :param attrs: JSON web token, user email
+        :return: validates data
+        """
         token = attrs['token']
         error_text = f"Provided activation token '{token}' is not valid"
         try:

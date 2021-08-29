@@ -2,6 +2,10 @@ from django.db import models
 
 
 class SpendingCategory(models.Model):
+    """
+    Model for spending categories.
+    Unique name for a specific user.
+    """
     name = models.CharField("Name", max_length=100)
     user = models.ForeignKey("authentication.User", on_delete=models.CASCADE, null=True, related_name="categories")
 
@@ -16,6 +20,10 @@ class SpendingCategory(models.Model):
 
 
 class Spending(models.Model):
+    """
+    Model for spendings
+    Required fields: created_at, amount
+    """
     amount = models.FloatField(verbose_name="amount")
     created_at = models.DateTimeField(auto_now_add=True)
     description = models.TextField("Description", null=True, blank=True)

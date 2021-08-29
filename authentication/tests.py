@@ -3,16 +3,16 @@ from unittest.mock import patch
 from django.utils.http import urlsafe_base64_encode
 from django.utils.encoding import force_bytes
 from mixer.backend.django import mixer
-from rest_framework.reverse import reverse
 from rest_framework import status
-from rest_framework_simplejwt.tokens import RefreshToken
+from rest_framework.reverse import reverse
 from rest_framework.test import APITestCase
+from rest_framework_simplejwt.tokens import RefreshToken
 
 from money_heist import settings
 from money_heist.tests import BaseAPITest
 from money_heist.tasks import send_email
-from .models import User
 from .tokens import TokenGenerator
+from authentication.models import User
 
 
 class TestObtainTokenPair(BaseAPITest):
