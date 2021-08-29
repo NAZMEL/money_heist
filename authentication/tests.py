@@ -1,10 +1,18 @@
+from unittest.mock import patch
+
+from django.utils.http import urlsafe_base64_encode
+from django.utils.encoding import force_bytes
+from mixer.backend.django import mixer
 from rest_framework.reverse import reverse
 from rest_framework import status
 from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework.test import APITestCase
 
+from money_heist import settings
 from money_heist.tests import BaseAPITest
+from money_heist.tasks import send_email
 from .models import User
+from .tokens import TokenGenerator
 
 
 class TestObtainTokenPair(BaseAPITest):
@@ -50,6 +58,7 @@ class TestRefreshJSONWebToken(BaseAPITest):
     def test_get_token_refresh_error(self):
         response = self.client.post(self.reverse_url, data={'refresh': 'fail_data'})
         self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
+
 
 
 class TestSignUpView(APITestCase):
@@ -147,3 +156,46 @@ class TestSignUpView(APITestCase):
             format="json"
         )
         self.assertEqual(response.status_code, status.HTTP_200_OK)
+
+
+class TestSendEmailCeleryTask(BaseAPITest):
+
+    def setUp(self):
+        self.email = 'melnyknasar@gmail.com'
+        self.password = 'test_password'
+        self.user = mixer.blend(User)
+        self.token = f'{urlsafe_base64_encode(force_bytes(self.email))}.{TokenGenerator.make_token(self.user)}'
+        self.url = f'{settings.USER_ACTIVATION_URL}?token={self.token}'
+        self.context = {
+            'url': self.url,
+            'email': self.email
+        }
+        self.template = 'notifications/activate_user.html'
+
+    @patch('money_heist.tasks.send_email.delay')
+    def test_success(self, send):
+
+        send_email.delay(
+                subject="Activate your MoneyHeist account",
+                template=self.template,
+                recipients=[self.email],
+                context=self.context
+        )
+        send.assert_called_with()
+
+    # def test_send_email_success(self):
+    #     try:
+    #         send_email.delay(
+    #             subject="Activate your MoneyHeist account",
+    #             template=self.template,
+    #             recipients=[self.email],
+    #             context=self.context
+    #         )
+    #         status_code = status.HTTP_200_OK
+    #     except SoftTimeLimitExceeded as e:
+    #         status_code = status.HTTP_424_FAILED_DEPENDENCY
+    #     except MaxRetriesExceededError as e:
+    #         status_code = status.HTTP_408_REQUEST_TIMEOUT
+    #
+    #     self.assertEqual(status_code, status.HTTP_200_OK)
+

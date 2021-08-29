@@ -13,8 +13,8 @@ import os
 import datetime
 import environs
 
-from celery.schedules import crontab
 from pathlib import Path
+from celery.schedules import crontab
 
 from money_heist.celery import app
 
