@@ -1,0 +1,54 @@
+@startuml django_db
+
+title "Money Heist Database"
+
+!theme materia
+
+package "authentication.models" as auth_models{
+    entity UserManager{
+        *id: INT<PK>
+        *email: VARCHAR<unique, case_insensitive>
+        *password: VARCHAR
+        *is_staff: BOOLEAN
+        *is_superuser: BOOLEAN
+        *is_active: BOOLEAN
+        *last_login_at: TIMESTAMP
+        *created_at: TIMESTAMP
+    }
+
+    entity User{
+        *id: INT<PK>
+        *email: VARCHAR<unique, case_insensitive>
+        *password: VARCHAR
+        *is_staff: BOOLEAN
+        *is_superuser: BOOLEAN
+        *is_active: BOOLEAN
+        *last_login_at: TIMESTAMP
+        *created_at: TIMESTAMP
+    }
+    UserManager }o--|| User
+}
+
+
+package "spendings.models" as spendings{
+    entity Spending{
+        * id: INT<PK> 
+        * amount: FLOAT
+        * description: VARCHAR
+        * created_at: TIMESTAMP
+        * category: INT<FK, unique>
+        * user: INT<FK, unique>
+    }
+    entity SpendingCategory{
+        * id: INT<PK>
+        * user: INT<FK, unique>
+        * name: VARCHAR, unique_together
+    }
+
+    User }|--|| SpendingCategory
+    Spending |o--|| User
+    Spending |o--|| SpendingCategory
+}
+
+
+@enduml

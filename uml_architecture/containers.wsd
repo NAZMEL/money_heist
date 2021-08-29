@@ -20,52 +20,34 @@ Person(user, "User", "The user of MoneyHeist")
 Person(developer, "Developer", "The developer of the system")
 
 System_Boundary(boundary, "MoneyHeist System"){
-    Container(web, "Web Application", "ReactJS", "The Front-End application of MoneyHeist", $sprite="react")
+    Container(web, "Web Application", "TO BE DEVELOPED", "Postman")
 
     Container_Boundary(api_boundary, "API", "REST Django application"){
-        Container(api, "API", "Django / NodeJS", "The REST API")
+        Container(api, "API", "Django", "The REST API")
         Container(admin_site, "Admin Site", "Django Admin", "Admin Site of the application")
         Container(docs, "API docs", "OpenAPI", "Swagger documentation to API")
 
         Rel_D(admin_site, api, "Performs management using")
     }
 
-    ' Container_Boundary(ml, "ML Boundary"){
-    '     Container(ml_api, "ML API", "FastAPI / NodeJS", "API to ML Service")
-    '     Container(ml_background, "ML Background Processor", "Celery / NodeJS", "Background processor")
-
-    '     ContainerDb(ml_redis, "Redis", "Redis", "Key-value DB for background processing", $sprite="redis")
-    '     ContainerDb(ml_mongo, "MongoDB", "MongoDB", "Document-value DB for any information needed to ML service")
-
-    '     Rel(ml_background, ml_redis, "Listens to the queue")
-    '     Rel(ml_api, ml_mongo, "Get additional data")
-    ' }
 
     ContainerDb(db, "Rel. Database", "PostgreSQL", "Relational database storage", $sprite="postgresql")
-    Container(background, "Background Processor", "Celery / NodeJS", "Background processor")
+    Container(background, "Background Processor", "Celery", "Background processor")
 
     ContainerDb(redis, "Redis", "Redis", "Key-value DB for background processing", $sprite="redis")
-    ' ContainerDb(es, "ElasticSearch", "ElasticSearch", "Document-based database with search engine")
 
     Rel(api, db, "Read / write data")
-    ' Rel(api, es, "Read / write documents")
     Rel_R(api, background, "Delay async tasks")
     Rel(background, redis, "Listens to the queue")
     Rel(web, api, "Requests the API")
-    ' Rel(web, ml_api, "Get suggestions")
-    ' Rel(ml_background, db, "Fetch / Sync main information")
 }
 
-' Container_Ext(stripe, "Stripe", "Stripe payment system", $sprite="cc_stripe")
 Container_Ext(mailjet, "MailJet", "Send emails to user", $sprite="email")
 
 Rel_R(background, mailjet, "Send emails using")
 Rel_D(developer, boundary, "Full access to API while development")
 Rel(user, web, "Uses the")
 Rel(admin, admin_site, "Uses the")
-
-
-' Rel_R(api, stripe, "Subscribe to plans")
 
 
 @enduml
