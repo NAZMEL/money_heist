@@ -154,18 +154,3 @@ class TestSignUpView(APITestCase):
             format="json"
         )
         self.assertEqual(response.status_code, status.HTTP_200_OK)
-
-
-class TestSendEmailCeleryTask(BaseAPITest):
-
-    def setUp(self):
-        self.email = 'melnyknasar@gmail.com'
-        self.password = 'test_password'
-        self.user = mixer.blend(User)
-        self.token = f'{urlsafe_base64_encode(force_bytes(self.email))}.{TokenGenerator.make_token(self.user)}'
-        self.url = f'{settings.USER_ACTIVATION_URL}?token={self.token}'
-        self.context = {
-            'url': self.url,
-            'email': self.email
-        }
-        self.template = 'notifications/activate_user.html'
