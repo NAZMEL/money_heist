@@ -1,5 +1,3 @@
-from unittest.mock import patch
-
 from django.utils.http import urlsafe_base64_encode
 from django.utils.encoding import force_bytes
 from mixer.backend.django import mixer
@@ -8,11 +6,12 @@ from rest_framework.reverse import reverse
 from rest_framework.test import APITestCase
 from rest_framework_simplejwt.tokens import RefreshToken
 
+from authentication.models import User
 from money_heist import settings
 from money_heist.tests import BaseAPITest
 from money_heist.tasks import send_email
-from .tokens import TokenGenerator
-from authentication.models import User
+from authentication.tokens import TokenGenerator
+
 
 
 class TestObtainTokenPair(BaseAPITest):
@@ -170,31 +169,3 @@ class TestSendEmailCeleryTask(BaseAPITest):
             'email': self.email
         }
         self.template = 'notifications/activate_user.html'
-
-    # @patch('money_heist.tasks.send_email.delay')
-    # def test_success(self, send):
-    #
-    #     send_email.delay(
-    #             subject="Activate your MoneyHeist account",
-    #             template=self.template,
-    #             recipients=[self.email],
-    #             context=self.context
-    #     )
-    #     send.assert_called_with()
-
-    # def test_send_email_success(self):
-    #     try:
-    #         send_email.delay(
-    #             subject="Activate your MoneyHeist account",
-    #             template=self.template,
-    #             recipients=[self.email],
-    #             context=self.context
-    #         )
-    #         status_code = status.HTTP_200_OK
-    #     except SoftTimeLimitExceeded as e:
-    #         status_code = status.HTTP_424_FAILED_DEPENDENCY
-    #     except MaxRetriesExceededError as e:
-    #         status_code = status.HTTP_408_REQUEST_TIMEOUT
-    #
-    #     self.assertEqual(status_code, status.HTTP_200_OK)
-
