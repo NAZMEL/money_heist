@@ -53,7 +53,7 @@ Main variables for Postgres Database:
 > **POSTGRES_USER** - postgres username <br>
 > **POSTGRES_PASSWORD** - postgres password <br>
 > **POSTGRES_DB** - database name <br>
-> **DB_HOST** - name of host (ex. `localohost`) <br>
+> **DB_HOST** - name of host (ex. `localhost`) <br>
 > **DB_PORT** - port for access to database (ex. `5433`) <br>
 
 Main variable for working Celery:
